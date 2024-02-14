@@ -1,0 +1,149 @@
+syntax = "proto3";
+
+package user;
+
+option go_package="../pb";
+
+service UserService {
+    // user
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc Login (LoginRequest) returns (LoginResponse);
+
+    // customer
+    rpc GetCustomer (GetCustomerRequest) returns (GetCustomerResponse);
+    rpc UpdateCustomer (UpdateCustomerRequest) returns (UpdateCustomerResponse);
+    rpc DeleteCustomer (DeleteCustomerRequest) returns (Empty);
+    rpc AddAddressCustomer (AddAddressCustomerRequest) returns (AddAddressCustomerResponse);
+    rpc UpdateAddressCustomer (UpdateAddressCustomerRequest) returns (UpdateAddressCustomerResponse);
+    rpc GetCustomerAddress (GetCustomerAddressRequest) returns (GetCustomerAddressResponse);
+
+    // admin-customer
+    rpc GetCustomerAdmin (GetCustomerAdminRequest) returns (GetCustomerAdminResponse);
+    rpc GetAllCustomerAdmin (Empty) returns (GetAllCustomerAdminResponse);
+    rpc UpdateCustomerAdmin (UpdateCustomerAdminRequest) returns (UpdateCustomerAdminResponse);
+    rpc DeleteCustomerAdmin (DeleteCustomerAdminRequest) returns (Empty);
+}
+
+message Empty {}
+
+message RegisterRequest {
+    string name = 1;
+    string email = 2;
+    string password = 3;
+    string created_at = 4;
+    string updated_at = 5;
+}
+
+message RegisterResponse {
+    string name = 1;
+    string email = 2;
+}
+
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    int32 id = 1;
+    string role = 2;
+    string name = 3;
+    string email = 4; 
+}
+
+message GetCustomerRequest {
+    int32 id = 1;
+}
+
+message GetCustomerResponse {
+    string name = 1;
+    string email = 2;
+}
+
+message UpdateCustomerRequest {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+    string updated_at = 5;
+}
+
+message UpdateCustomerResponse {
+    string name = 1;
+    string email = 2;
+}
+
+message DeleteCustomerRequest {
+    int32 id = 1;
+}
+
+message AddAddressCustomerRequest {
+    int32 customer_id = 1;
+    string country = 2;
+    string city = 3;
+    string updated_at = 4;
+}
+
+message AddAddressCustomerResponse {
+    string country = 1;
+    string city = 2;
+}
+
+message UpdateAddressCustomerRequest {
+    int32 customer_id = 1;
+    string country = 2;
+    string city = 3;   
+    string updated_at = 4;
+}
+
+message UpdateAddressCustomerResponse {
+    string country = 1;
+    string city = 2;
+}
+
+message GetCustomerAdminRequest {
+    int32 user_id = 1;
+}
+
+message GetCustomerAdminResponse {
+    int32 user_id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message GetAllCustomerAdminResponse {
+    repeated CustomerResponse customers = 1;
+}
+
+message CustomerResponse {
+    int32 user_id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message UpdateCustomerAdminRequest {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+    string updated_at = 5;
+}
+
+message UpdateCustomerAdminResponse {
+    string name = 1;
+    string email = 2;
+}
+
+message DeleteCustomerAdminRequest {
+    int32 id = 1;
+}
+
+message GetCustomerAddressRequest {
+    int32 customer_id = 1;
+}
+
+message GetCustomerAddressResponse {
+    string address_id = 1;
+    string country = 2;
+    string city = 3;
+}
