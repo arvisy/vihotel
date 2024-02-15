@@ -5,9 +5,10 @@ import (
 	"ms-booking/model"
 	"ms-booking/pb"
 	"ms-booking/repository"
-	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type BookingController struct {
@@ -22,9 +23,18 @@ func NewBookingController(bookingRepository *repository.BookingRepository) *Book
 }
 
 func (b *BookingController) CreateBooking(ctx context.Context, in *pb.CreateBookingRequest) (*pb.CreateBookingResponse, error) {
-	booking := &model.Booking{
-		UserID:       in.UserId,
-		RoomID:       in.RoomId,
+	booking := &model.BookingDetails{
+		User: model.User{
+			ID:    in.User.UserId,
+			Name:  in.User.Name,
+			Email: in.User.Email,
+		},
+		Room: model.Room{
+			ID:       in.Room.RoomId,
+			HotelID:  in.Room.HotelId,
+			Capacity: int(in.Room.Capacity),
+			Price:    int(in.Room.Price),
+		},
 		CheckinDate:  in.CheckinDate,
 		CheckoutDate: in.CheckoutDate,
 		Status:       "pending",
@@ -62,28 +72,24 @@ func (b *BookingController) GetBooking(ctx context.Context, in *pb.GetBookingReq
 	}, nil
 }
 
-func (b *BookingController) UpdateBooking(ctx context.Context, in *pb.UpdateBookingRequest) (*pb.UpdateBookingResponse, error) {
-	bookingID, _ := primitive.ObjectIDFromHex(in.Booking.BookingId)
-
-	booking := &model.Booking{
-		ID:           bookingID,
-		UserID:       in.Booking.UserId,
-		RoomID:       in.Booking.RoomId,
-		CheckinDate:  in.Booking.CheckinDate,
-		CheckoutDate: in.Booking.CheckoutDate,
-		Status:       in.Booking.Status,
-		CreatedAt:    in.Booking.CreatedAt,
-		UpdatedAt:    time.Now().Format(time.RFC3339),
-	}
-
-	err := b.bookingRepository.UpdateBooking(in.Booking.BookingId, booking)
+func (s *BookingController) UpdateBooking(ctx context.Context, req *pb.UpdateBookingRequest) (*pb.UpdateBookingResponse, error) {
+	// Validasi booking ID
+	bookingID, err := primitive.ObjectIDFromHex(req.BookingId)
 	if err != nil {
-		return nil, err
+		return nil, status.Errorf(codes.InvalidArgument, "invalid booking ID: %v", err)
 	}
 
-	return &pb.UpdateBookingResponse{
-		BookingId: booking.ID.Hex(),
-	}, nil
+	// Update booking di repository
+	if err := s.bookingRepository.UpdateBooking(ctx, bookingID, req.Booking); err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to update booking: %v", err)
+	}
+
+	// Buat respons
+	resp := &pb.UpdateBookingResponse{
+		BookingId: req.BookingId,
+	}
+
+	return resp, nil
 }
 
 func (b *BookingController) DeleteBooking(ctx context.Context, in *pb.DeleteBookingRequest) (*pb.DeleteBookingResponse, error) {

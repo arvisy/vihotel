@@ -13,6 +13,7 @@ import (
 )
 
 func main() {
+	// user-service
 	userConn, err := grpc.Dial(":50001", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatal(err)
@@ -22,18 +23,29 @@ func main() {
 	userService := pb.NewUserServiceClient(userConn)
 	u := controller.NewUserController(userService)
 
+	// hotel-service
 	hotelConn, err := grpc.Dial(":50002", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer userConn.Close()
+	defer hotelConn.Close()
 
 	hotelService := pb.NewHotelServiceClient(hotelConn)
 	h := controller.NewHotelController(hotelService)
 
+	// booking-service
+	bookingConn, err := grpc.Dial(":50003", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer bookingConn.Close()
+
+	bookingService := pb.NewBookingServiceClient(bookingConn)
+	b := controller.NewBookingController(userService, hotelService, bookingService)
+
 	e := echo.New()
 
-	route.InitRoutes(e, u, h)
+	route.InitRoutes(e, u, h, b)
 
 	// e.Use(echoMiddleware.Logger())
 	e.Use(echoMiddleware.Recover())

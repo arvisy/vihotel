@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"ms-booking/model"
+	"ms-booking/pb"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -19,7 +20,7 @@ func NewBookingRepository(DB *mongo.Database) *BookingRepository {
 	return &BookingRepository{DB: DB}
 }
 
-func (b *BookingRepository) CreateBooking(booking *model.Booking) (string, error) {
+func (b *BookingRepository) CreateBooking(booking *model.BookingDetails) (string, error) {
 	booking.CreatedAt = time.Now().Format(time.RFC3339)
 	booking.UpdatedAt = time.Now().Format(time.RFC3339)
 	result, err := b.DB.Collection("bookings").InsertOne(context.Background(), booking)
@@ -46,18 +47,25 @@ func (b *BookingRepository) GetBookingByID(bookingID string) (*model.Booking, er
 	return &booking, nil
 }
 
-func (b *BookingRepository) UpdateBooking(bookingID string, booking *model.Booking) error {
-	id, err := primitive.ObjectIDFromHex(bookingID)
+func (b *BookingRepository) UpdateBooking(ctx context.Context, bookingID primitive.ObjectID, booking *pb.Booking) error {
+	filter := bson.M{"_id": bookingID}
+
+	update := bson.M{
+		"$set": bson.M{
+			"user_id":       booking.UserId,
+			"room_id":       booking.RoomId,
+			"checkin_date":  booking.CheckinDate,
+			"checkout_date": booking.CheckoutDate,
+			"status":        booking.Status,
+			"updated_at":    time.Now().Format(time.RFC3339),
+		},
+	}
+
+	_, err := b.DB.Collection("bookings").UpdateOne(ctx, filter, update)
 	if err != nil {
 		return err
 	}
-	booking.UpdatedAt = time.Now().Format(time.RFC3339)
-	filter := bson.M{"_id": id}
-	update := bson.M{"$set": booking}
-	_, err = b.DB.Collection("bookings").UpdateOne(context.Background(), filter, update)
-	if err != nil {
-		return err
-	}
+
 	return nil
 }
 

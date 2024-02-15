@@ -27,3 +27,14 @@ type User struct {
 	Name  string `bson:"name,omitempty"`
 	Email string `bson:"email,omitempty"`
 }
+
+type BookingDetails struct {
+	ID           primitive.ObjectID `bson:"_id,omitempty"`
+	User         User               `bson:"user_info,omitempty"`
+	Room         Room               `bson:"room_info,omitempty"`
+	CheckinDate  string             `bson:"checkin_date,omitempty"`
+	CheckoutDate string             `bson:"checkout_date,omitempty"`
+	Status       string             `bson:"status,omitempty"`
+	CreatedAt    string             `bson:"created_at,omitempty"`
+	UpdatedAt    string             `bson:"updated_at,omitempty"`
+}

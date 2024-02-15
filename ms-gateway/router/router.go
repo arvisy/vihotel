@@ -11,6 +11,7 @@ func InitRoutes(
 	e *echo.Echo,
 	user *controller.UserContoller,
 	hotel *controller.HotelController,
+	booking *controller.BookingController,
 ) {
 	// public endpoint
 	e.POST("/register", user.Register)
@@ -25,6 +26,12 @@ func InitRoutes(
 		customer.DELETE("/user", user.DeleteCustomer)
 		customer.POST("/user/address", user.AddAddress)
 		customer.PUT("/user/address", user.UpdateAddress)
+
+		customer.POST("/booking", booking.CreateBooking)
+		customer.GET("/booking/:booking_id", booking.GetBooking)
+		customer.PUT("/booking/:booking_id", booking.UpdateBooking)
+		customer.GET("/booking", booking.ListBookings)
+		customer.DELETE("/booking/:booking_id", booking.DeleteBooking)
 	}
 
 	admin := e.Group("/api/v1")

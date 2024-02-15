@@ -7,10 +7,10 @@ import (
 type Booking struct {
 	ID           primitive.ObjectID `bson:"_id,omitempty"`
 	UserID       int32              `bson:"user_id,omitempty"`
-	RoomID       int32              `bson:"room_id,omitempty"`
-	CheckinDate  string             `bson:"checkin_date,omitempty"`
-	CheckoutDate string             `bson:"checkout_date,omitempty"`
-	Status       string             `bson:"status,omitempty"`
+	RoomID       int32              `bson:"room_id,omitempty" json:"room_Id"`
+	CheckinDate  string             `bson:"checkin_date,omitempty" json:"checkin_date"`
+	CheckoutDate string             `bson:"checkout_date,omitempty" json:"checkout_date"`
+	Status       string             `bson:"status,omitempty" json:"status"`
 	CreatedAt    string             `bson:"created_at,omitempty"`
 	UpdatedAt    string             `bson:"updated_at,omitempty"`
 }
