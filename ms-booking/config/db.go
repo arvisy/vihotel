@@ -19,6 +19,8 @@ func LoadEnv() {
 }
 
 func ConnectMongoDB() *mongo.Database {
+	LoadEnv()
+
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("MONGOURI")))
 	if err != nil {
 		log.Fatal(err)

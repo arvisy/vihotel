@@ -74,7 +74,7 @@ func (b *BookingRepository) DeleteBooking(bookingID string) error {
 	return nil
 }
 
-func (b *BookingRepository) ListBookings(userID string) ([]*model.Booking, error) {
+func (b *BookingRepository) ListBookings(userID int32) ([]*model.Booking, error) {
 	var bookings []*model.Booking
 	cursor, err := b.DB.Collection("bookings").Find(context.Background(), bson.M{"user_id": userID})
 	if err != nil {

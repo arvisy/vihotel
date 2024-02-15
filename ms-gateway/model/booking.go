@@ -15,14 +15,14 @@ type Booking struct {
 	UpdatedAt    string             `bson:"updated_at,omitempty"`
 }
 
-type Room struct {
+type RoomBooking struct {
 	ID       int32 `bson:"_id,omitempty"`
 	HotelID  int32 `bson:"hotel_id,omitempty"`
 	Capacity int   `bson:"capacity,omitempty"`
 	Price    int   `bson:"price,omitempty"`
 }
 
-type User struct {
+type UserBooking struct {
 	ID    int32  `bson:"_id,omitempty"`
 	Name  string `bson:"name,omitempty"`
 	Email string `bson:"email,omitempty"`

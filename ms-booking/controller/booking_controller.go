@@ -22,12 +22,9 @@ func NewBookingController(bookingRepository *repository.BookingRepository) *Book
 }
 
 func (b *BookingController) CreateBooking(ctx context.Context, in *pb.CreateBookingRequest) (*pb.CreateBookingResponse, error) {
-	userIDCon, _ := primitive.ObjectIDFromHex(in.UserId)
-	roomIDCon, _ := primitive.ObjectIDFromHex(in.RoomId)
-
 	booking := &model.Booking{
-		UserID:       userIDCon,
-		RoomID:       roomIDCon,
+		UserID:       in.UserId,
+		RoomID:       in.RoomId,
 		CheckinDate:  in.CheckinDate,
 		CheckoutDate: in.CheckoutDate,
 		Status:       "pending",
@@ -51,8 +48,8 @@ func (b *BookingController) GetBooking(ctx context.Context, in *pb.GetBookingReq
 
 	bookingProto := &pb.Booking{
 		BookingId:    booking.ID.Hex(),
-		UserId:       booking.UserID.Hex(),
-		RoomId:       booking.RoomID.Hex(),
+		UserId:       booking.UserID,
+		RoomId:       booking.RoomID,
 		CheckinDate:  booking.CheckinDate,
 		CheckoutDate: booking.CheckoutDate,
 		Status:       booking.Status,
@@ -67,13 +64,11 @@ func (b *BookingController) GetBooking(ctx context.Context, in *pb.GetBookingReq
 
 func (b *BookingController) UpdateBooking(ctx context.Context, in *pb.UpdateBookingRequest) (*pb.UpdateBookingResponse, error) {
 	bookingID, _ := primitive.ObjectIDFromHex(in.Booking.BookingId)
-	userID, _ := primitive.ObjectIDFromHex(in.Booking.UserId)
-	roomID, _ := primitive.ObjectIDFromHex(in.Booking.RoomId)
 
 	booking := &model.Booking{
 		ID:           bookingID,
-		UserID:       userID,
-		RoomID:       roomID,
+		UserID:       in.Booking.UserId,
+		RoomID:       in.Booking.RoomId,
 		CheckinDate:  in.Booking.CheckinDate,
 		CheckoutDate: in.Booking.CheckoutDate,
 		Status:       in.Booking.Status,
@@ -112,8 +107,8 @@ func (b *BookingController) ListBookings(ctx context.Context, in *pb.ListBooking
 	for _, booking := range bookings {
 		bookingProto := &pb.Booking{
 			BookingId:    booking.ID.Hex(),
-			UserId:       booking.UserID.Hex(),
-			RoomId:       booking.RoomID.Hex(),
+			UserId:       booking.UserID,
+			RoomId:       booking.RoomID,
 			CheckinDate:  booking.CheckinDate,
 			CheckoutDate: booking.CheckoutDate,
 			Status:       booking.Status,
