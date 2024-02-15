@@ -1,0 +1,29 @@
+package model
+
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
+
+type Booking struct {
+	ID           primitive.ObjectID `bson:"_id,omitempty"`
+	UserID       primitive.ObjectID `bson:"user_id,omitempty"`
+	RoomID       primitive.ObjectID `bson:"room_id,omitempty"`
+	CheckinDate  string             `bson:"checkin_date,omitempty"`
+	CheckoutDate string             `bson:"checkout_date,omitempty"`
+	Status       string             `bson:"status,omitempty"`
+	CreatedAt    string             `bson:"created_at,omitempty"`
+	UpdatedAt    string             `bson:"updated_at,omitempty"`
+}
+
+type Room struct {
+	ID       primitive.ObjectID `bson:"_id,omitempty"`
+	HotelID  primitive.ObjectID `bson:"hotel_id,omitempty"`
+	Capacity int                `bson:"capacity,omitempty"`
+	Price    int                `bson:"price,omitempty"`
+}
+
+type User struct {
+	ID    primitive.ObjectID `bson:"_id,omitempty"`
+	Name  string             `bson:"name,omitempty"`
+	Email string             `bson:"email,omitempty"`
+}
