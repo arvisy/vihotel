@@ -1,0 +1,130 @@
+syntax = "proto3";
+
+package user;
+
+option go_package="../pb";
+
+service HotelService {
+    // hotel operations
+    rpc CreateHotel(CreateHotelRequest) returns (CreateHotelResponse);
+    rpc UpdateHotel(UpdateHotelRequest) returns (UpdateHotelResponse);
+    rpc DeleteHotel(DeleteHotelRequest) returns (DeleteHotelResponse);
+    rpc GetHotel(GetHotelRequest) returns (GetHotelResponse);
+    rpc ListHotels(ListHotelsRequest) returns (ListHotelsResponse);
+
+    // room operations
+    rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse);
+    rpc UpdateRoom(UpdateRoomRequest) returns (UpdateRoomResponse);
+    rpc DeleteRoom(DeleteRoomRequest) returns (DeleteRoomResponse);
+    rpc GetRoom(GetRoomRequest) returns (GetRoomResponse);
+    rpc ListRooms(ListRoomsRequest) returns (ListRoomsResponse);
+}
+
+message CreateHotelRequest {
+    string name = 1;
+    string location = 2;
+    string description = 3;
+}
+
+message CreateHotelResponse {
+    int32 id = 1;
+}
+
+message UpdateHotelRequest {
+    int32 id = 1;
+    string name = 2;
+    string location = 3;
+    string description = 4;
+}
+
+message UpdateHotelResponse {
+    int32 id = 1;
+}
+
+message DeleteHotelRequest {
+    int32 id = 1;
+}
+
+message DeleteHotelResponse {
+    int32 id = 1;
+}
+
+message GetHotelRequest {
+    int32 id = 1;
+}
+
+message GetHotelResponse {
+    Hotel hotel = 1;
+}
+
+message ListHotelsRequest {
+}
+
+message ListHotelsResponse {
+    repeated Hotel hotels = 1;
+}
+
+message Hotel {
+    int32 id = 1;
+    string name = 2;
+    string location = 3;
+    string description = 4;
+    string created_at = 5;
+    string updated_at = 6;
+}
+
+message CreateRoomRequest {
+    int32 hotel_id = 1;
+    string type = 2;
+    int32 capacity = 3;
+    int32 price = 4;
+}
+
+message CreateRoomResponse {
+    int32 id = 1;
+}
+
+message UpdateRoomRequest {
+    int32 id = 1;
+    int32 hotel_id = 2;
+    string type = 3;
+    int32 capacity = 4;
+    int32 price = 5;
+}
+
+message UpdateRoomResponse {
+    int32 id = 1;
+}
+
+message DeleteRoomRequest {
+    int32 id = 1;
+}
+
+message DeleteRoomResponse {
+    int32 id = 1;
+}
+
+message GetRoomRequest {
+    int32 id = 1;
+}
+
+message GetRoomResponse {
+    Room room = 1;
+}
+
+message ListRoomsRequest {
+    int32 hotel_id = 1;
+}
+
+message ListRoomsResponse {
+    repeated Room rooms = 1;
+}
+
+message Room {
+    int32 id = 1;
+    int32 hotel_id = 2;
+    int32 capacity = 3;
+    int32 price = 4;
+    string created_at = 5;
+    string updated_at = 6;
+}

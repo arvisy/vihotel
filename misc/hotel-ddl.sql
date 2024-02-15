@@ -1,0 +1,19 @@
+CREATE TABLE hotels (
+  "id" SERIAL PRIMARY KEY,
+  "name" VARCHAR NOT NULL,
+  "location" VARCHAR NOT NULL,
+  "description" VARCHAR NOT NULL,
+  "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE rooms (
+  "id" SERIAL PRIMARY KEY,
+  "hotel_id" INT NOT NULL,
+  "capacity" INT NOT NULL,
+  "price" INT NOT NULL,
+  "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE "rooms" ADD FOREIGN KEY ("hotel_id") REFERENCES "hotels" ("id");

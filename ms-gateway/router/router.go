@@ -10,6 +10,7 @@ import (
 func InitRoutes(
 	e *echo.Echo,
 	user *controller.UserContoller,
+	hotel *controller.HotelController,
 ) {
 	// public endpoint
 	e.POST("/register", user.Register)
@@ -33,5 +34,17 @@ func InitRoutes(
 		admin.GET("/user/admin", user.GetAllCustomerAdmin)
 		admin.PUT("/user/admin/:id", user.UpdateCustomerAdmin)
 		admin.DELETE("/user/admin/:id", user.DeleteCustomerAdmin)
+
+		admin.POST("/hotel", hotel.CreateHotel)
+		admin.PUT("/hotel", hotel.UpdateHotel)
+		admin.DELETE("/hotel/:id", hotel.DeleteHotel)
+		admin.GET("/hotel/:id", hotel.GetHotel)
+		admin.GET("/hotel", hotel.ListHotels)
+
+		admin.POST("/hotel/room", hotel.CreateRoom)
+		admin.PUT("/hotel/room", hotel.UpdateRoom)
+		admin.DELETE("/hotel/room/:id", hotel.DeleteRoom)
+		admin.GET("/hotel/room/:id", hotel.GetRoom)
+		admin.GET("/hotel/room", hotel.ListRooms)
 	}
 }

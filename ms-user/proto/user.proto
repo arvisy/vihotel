@@ -17,7 +17,7 @@ service UserService {
     rpc UpdateAddressCustomer (UpdateAddressCustomerRequest) returns (UpdateAddressCustomerResponse);
     rpc GetCustomerAddress (GetCustomerAddressRequest) returns (GetCustomerAddressResponse);
 
-    // admin-customer
+    // admin
     rpc GetCustomerAdmin (GetCustomerAdminRequest) returns (GetCustomerAdminResponse);
     rpc GetAllCustomerAdmin (Empty) returns (GetAllCustomerAdminResponse);
     rpc UpdateCustomerAdmin (UpdateCustomerAdminRequest) returns (UpdateCustomerAdminResponse);

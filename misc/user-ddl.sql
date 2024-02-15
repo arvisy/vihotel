@@ -10,14 +10,14 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "roles" (
-  "id" serial PRIMARY KEY,
-  "name" varchar NOT NULL
+  "id" SERIAL PRIMARY KEY,
+  "name" VARCHAR NOT NULL
 );
 
 CREATE TABLE "address" (
-  "id" serial PRIMARY KEY,
-  "country" varchar NOT NULL,
-  "city" varchar NOT NULL
+  "id" SERIAL PRIMARY KEY,
+  "country" VARCHAR NOT NULL,
+  "city" VARCHAR NOT NULL
 );
 
 ALTER TABLE "users" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("id");

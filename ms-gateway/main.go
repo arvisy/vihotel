@@ -20,12 +20,20 @@ func main() {
 	defer userConn.Close()
 
 	userService := pb.NewUserServiceClient(userConn)
-
 	u := controller.NewUserController(userService)
+
+	hotelConn, err := grpc.Dial(":50002", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer userConn.Close()
+
+	hotelService := pb.NewHotelServiceClient(hotelConn)
+	h := controller.NewHotelController(hotelService)
 
 	e := echo.New()
 
-	route.InitRoutes(e, u)
+	route.InitRoutes(e, u, h)
 
 	// e.Use(echoMiddleware.Logger())
 	e.Use(echoMiddleware.Recover())
