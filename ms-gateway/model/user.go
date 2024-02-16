@@ -21,3 +21,35 @@ type Address struct {
 	Country string `json:"country"`
 	City    string `json:"city"`
 }
+
+// response for swagger
+type RegisterResponse struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+type InputRegisterRequest struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type LoginRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type AddressRequest struct {
+	Country string `json:"country"`
+	City    string `json:"city"`
+}
+
+type LoginResponse struct {
+	Message string `json:"message"`
+	Token   string `json:"token"`
+}
+
+type InfoCustomerResponse struct {
+	User    RegisterResponse `json:"user"`
+	Address AddressRequest   `json:"address"`
+}

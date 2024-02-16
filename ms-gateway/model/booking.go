@@ -27,3 +27,15 @@ type UserBooking struct {
 	Name  string `bson:"name,omitempty"`
 	Email string `bson:"email,omitempty"`
 }
+
+type CreateBookingRequest struct {
+	RoomID       int32       `json:"room_id"`
+	CheckinDate  string      `json:"checkin_date"`
+	CheckoutDate string      `json:"checkout_date"`
+	Room         RoomRequest `json:"room"`
+}
+
+type RoomRequest struct {
+	HotelID  string `json:"hotel_id"`
+	Capacity string `json:"capacity"`
+}

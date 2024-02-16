@@ -21,6 +21,18 @@ func NewPaymentController(paymentGRPC pb.PaymentServiceClient, bookingGRPC pb.Bo
 	}
 }
 
+// @Summary      Private
+// @Description  Create payments
+// @Tags         Payment
+// @Accept       json
+// @Produce      json
+// @Param		 data body model.CreatePaymentRequest true "The input user struct"
+// @Success      201  {object}  model.Payment
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/payment/:booking_id [Get]
 func (p *PaymentController) CreatePayment(c echo.Context) error {
 	bookingID := c.Param("booking_id")
 	if bookingID == "" {
@@ -79,6 +91,17 @@ func (p *PaymentController) CreatePayment(c echo.Context) error {
 	})
 }
 
+// @Summary      Private
+// @Description  Get payment
+// @Tags         Payment
+// @Accept       json
+// @Produce      json
+// @Success      201  {object}  model.Payment
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/payment/:payment_id [Get]
 func (p *PaymentController) GetPayment(c echo.Context) error {
 	paymentID := c.Param("payment_id")
 	if paymentID == "" {

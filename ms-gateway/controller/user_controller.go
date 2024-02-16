@@ -13,17 +13,28 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type UserContoller struct {
+type UserController struct {
 	userGRPC pb.UserServiceClient
 }
 
-func NewUserController(userGRPC pb.UserServiceClient) *UserContoller {
-	return &UserContoller{
+func NewUserController(userGRPC pb.UserServiceClient) *UserController {
+	return &UserController{
 		userGRPC: userGRPC,
 	}
 }
 
-func (u *UserContoller) Register(c echo.Context) error {
+// @Summary      Public
+// @Description  Register name, email, and password
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Param		 data body model.InputRegisterRequest true "The input user struct"
+// @Success      201  {object}  model.RegisterResponse
+// @Failure      400  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /register [Post]
+func (u *UserController) Register(c echo.Context) error {
 	var payload model.User
 
 	err := c.Bind(&payload)
@@ -65,7 +76,18 @@ func (u *UserContoller) Register(c echo.Context) error {
 	return c.JSON(201, response)
 }
 
-func (u *UserContoller) Login(c echo.Context) error {
+// @Summary      Public
+// @Description  Login email and password
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Param		 data body model.LoginRequest true "The input user struct"
+// @Success      201  {object}  model.LoginResponse
+// @Failure      400  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /login [Post]
+func (u *UserController) Login(c echo.Context) error {
 	var loginRequest model.User
 	if err := c.Bind(&loginRequest); err != nil {
 		return c.JSON(400, helper.Response{
@@ -110,7 +132,18 @@ func (u *UserContoller) Login(c echo.Context) error {
 	})
 }
 
-func (u *UserContoller) GetInfoCustomer(c echo.Context) error {
+// @Summary      Private
+// @Description  Get info customer
+// @Tags         Customer
+// @Accept       json
+// @Produce      json
+// @Success      201  {object}  model.InfoCustomerResponse
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/user [Get]
+func (u *UserController) GetInfoCustomer(c echo.Context) error {
 	userIDConv, ok := c.Get("id").(string)
 	if !ok {
 		return c.JSON(400, helper.Response{
@@ -145,7 +178,19 @@ func (u *UserContoller) GetInfoCustomer(c echo.Context) error {
 	})
 }
 
-func (u *UserContoller) UpdateCustomer(c echo.Context) error {
+// @Summary      Private
+// @Description  Update info customer
+// @Tags         Customer
+// @Accept       json
+// @Produce      json
+// @Param		 data body model.InputRegisterRequest true "The input user struct"
+// @Success      201  {object}  model.RegisterResponse
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/user [Put]
+func (u *UserController) UpdateCustomer(c echo.Context) error {
 	userIDConv, ok := c.Get("id").(string)
 	if !ok {
 		return c.JSON(400, helper.Response{
@@ -196,7 +241,18 @@ func (u *UserContoller) UpdateCustomer(c echo.Context) error {
 	})
 }
 
-func (u *UserContoller) DeleteCustomer(c echo.Context) error {
+// @Summary      Private
+// @Description  Delete customer
+// @Tags         Customer
+// @Accept       json
+// @Produce      json
+// @Success      201  {object}  helper.Message
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/user [Delete]
+func (u *UserController) DeleteCustomer(c echo.Context) error {
 	userIDConv, ok := c.Get("id").(string)
 	if !ok {
 		return c.JSON(400, helper.Response{
@@ -227,7 +283,18 @@ func (u *UserContoller) DeleteCustomer(c echo.Context) error {
 	})
 }
 
-func (u *UserContoller) GetCustomerAdmin(c echo.Context) error {
+// @Summary      Private
+// @Description  Get info customer
+// @Tags         Admin
+// @Accept       json
+// @Produce      json
+// @Success      201  {object}  model.RegisterResponse
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/user/admin/:id [Get]
+func (u *UserController) GetCustomerAdmin(c echo.Context) error {
 	userIDConv := c.Param("id")
 
 	userID, err := strconv.Atoi(userIDConv)
@@ -253,7 +320,18 @@ func (u *UserContoller) GetCustomerAdmin(c echo.Context) error {
 	})
 }
 
-func (u *UserContoller) GetAllCustomerAdmin(c echo.Context) error {
+// @Summary      Private
+// @Description  Get all customer
+// @Tags         Admin
+// @Accept       json
+// @Produce      json
+// @Success      201  {object}  model.RegisterResponse
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/user/admin [Get]
+func (u *UserController) GetAllCustomerAdmin(c echo.Context) error {
 	response, err := u.userGRPC.GetAllCustomerAdmin(context.TODO(), &pb.Empty{})
 
 	if err != nil {
@@ -268,7 +346,19 @@ func (u *UserContoller) GetAllCustomerAdmin(c echo.Context) error {
 	})
 }
 
-func (u *UserContoller) UpdateCustomerAdmin(c echo.Context) error {
+// @Summary      Private
+// @Description  Update info customer
+// @Tags         Admin
+// @Accept       json
+// @Produce      json
+// @Param		 data body model.InputRegisterRequest true "The input user struct"
+// @Success      201  {object}  model.RegisterResponse
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/user/admin/:id [Put]
+func (u *UserController) UpdateCustomerAdmin(c echo.Context) error {
 	userIDConv := c.Param("id")
 
 	userID, err := strconv.Atoi(userIDConv)
@@ -305,7 +395,18 @@ func (u *UserContoller) UpdateCustomerAdmin(c echo.Context) error {
 	})
 }
 
-func (u *UserContoller) DeleteCustomerAdmin(c echo.Context) error {
+// @Summary      Private
+// @Description  Delete customer
+// @Tags         Admin
+// @Accept       json
+// @Produce      json
+// @Success      201  {object}  helper.Message
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/user/admin/:id [Delete]
+func (u *UserController) DeleteCustomerAdmin(c echo.Context) error {
 	userIDConv := c.Param("id")
 
 	userID, err := strconv.Atoi(userIDConv)
@@ -331,7 +432,19 @@ func (u *UserContoller) DeleteCustomerAdmin(c echo.Context) error {
 	})
 }
 
-func (u *UserContoller) AddAddress(c echo.Context) error {
+// @Summary      Private
+// @Description  Add address customer
+// @Tags         Customer
+// @Accept       json
+// @Produce      json
+// @Param		 data body model.AddressRequest true "The input user struct"
+// @Success      201  {object}  model.Address
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/user/address [Post]
+func (u *UserController) AddAddress(c echo.Context) error {
 	userIDConv, ok := c.Get("id").(string)
 	if !ok {
 		return c.JSON(400, helper.Response{
@@ -388,7 +501,19 @@ func (u *UserContoller) AddAddress(c echo.Context) error {
 	})
 }
 
-func (u *UserContoller) UpdateAddress(c echo.Context) error {
+// @Summary      Private
+// @Description  Update address customer
+// @Tags         Customer
+// @Accept       json
+// @Produce      json
+// @Param		 data body model.AddressRequest true "The input user struct"
+// @Success      201  {object}  model.Address
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/user/address [Put]
+func (u *UserController) UpdateAddress(c echo.Context) error {
 	userIDConv, ok := c.Get("id").(string)
 	if !ok {
 		return c.JSON(400, helper.Response{

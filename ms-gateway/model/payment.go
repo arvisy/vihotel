@@ -13,3 +13,8 @@ type Payment struct {
 	CreatedAt  string             `bson:"created_at,omitempty"`
 	UpdatedAt  string             `bson:"updated_at,omitempty"`
 }
+
+type CreatePaymentRequest struct {
+	Amount int32  `bson:"amount,omitempty" json:"amount"`
+	Method string `bson:"method,omitempty" json:"method"`
+}

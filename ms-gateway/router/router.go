@@ -9,7 +9,7 @@ import (
 
 func InitRoutes(
 	e *echo.Echo,
-	user *controller.UserContoller,
+	user *controller.UserController,
 	hotel *controller.HotelController,
 	booking *controller.BookingController,
 	payment *controller.PaymentController,

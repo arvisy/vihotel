@@ -12,6 +12,18 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
+// @title vihotel
+// @version 1.0
+// @description An e-commerce API for booking hotel and with many features, made using microservices and gRPC.
+
+// @contact.name Arviansyah Nur
+// @contact.url http://www.swagger.io/support
+// @contact.email arviansyahnur3@gmail.com
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:8080
 func main() {
 	// user-service
 	userConn, err := grpc.Dial(":50001", grpc.WithTransportCredentials(insecure.NewCredentials()))

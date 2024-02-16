@@ -1,0 +1,1142 @@
+definitions:
+  helper.Message:
+    properties:
+      message:
+        type: string
+    type: object
+  helper.MessageDetails:
+    properties:
+      detail:
+        type: string
+      message:
+        type: string
+    type: object
+  model.Address:
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+      id:
+        type: integer
+    type: object
+  model.AddressRequest:
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+    type: object
+  model.Booking:
+    properties:
+      checkin_date:
+        type: string
+      checkout_date:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: string
+      room_Id:
+        type: integer
+      status:
+        type: string
+      updatedAt:
+        type: string
+      userID:
+        type: integer
+    type: object
+  model.CreateBookingRequest:
+    properties:
+      checkin_date:
+        type: string
+      checkout_date:
+        type: string
+      room:
+        $ref: '#/definitions/model.RoomRequest'
+      room_id:
+        type: integer
+    type: object
+  model.CreateHotelRequest:
+    properties:
+      description:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+    type: object
+  model.CreatePaymentRequest:
+    properties:
+      amount:
+        type: integer
+      method:
+        type: string
+    type: object
+  model.CreateRoomRequest:
+    properties:
+      capacity:
+        type: integer
+      hotel_id:
+        type: integer
+      price:
+        type: integer
+    type: object
+  model.Hotel:
+    properties:
+      create_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      location:
+        type: string
+      name:
+        type: string
+      update_at:
+        type: string
+    type: object
+  model.InfoCustomerResponse:
+    properties:
+      address:
+        $ref: '#/definitions/model.AddressRequest'
+      user:
+        $ref: '#/definitions/model.RegisterResponse'
+    type: object
+  model.InputRegisterRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    type: object
+  model.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  model.LoginResponse:
+    properties:
+      message:
+        type: string
+      token:
+        type: string
+    type: object
+  model.Payment:
+    properties:
+      amount:
+        type: integer
+      bookingID:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: string
+      invoice_id:
+        type: string
+      invoice_url:
+        type: string
+      method:
+        type: string
+      status:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  model.RegisterResponse:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+    type: object
+  model.Room:
+    properties:
+      capacity:
+        type: integer
+      create_at:
+        type: string
+      hotel_id:
+        type: integer
+      id:
+        type: integer
+      price:
+        type: integer
+      update_at:
+        type: string
+    type: object
+  model.RoomRequest:
+    properties:
+      capacity:
+        type: string
+      hotel_id:
+        type: string
+    type: object
+  model.UpdateRoomRequest:
+    properties:
+      capacity:
+        type: integer
+      hotel_id:
+        type: integer
+      id:
+        type: integer
+      price:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: arviansyahnur3@gmail.com
+    name: Arviansyah Nur
+    url: http://www.swagger.io/support
+  description: An e-commerce API for booking hotel and with many features, made using
+    microservices and gRPC.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: vihotel
+  version: "1.0"
+paths:
+  /api/v1/booking:
+    get:
+      consumes:
+      - application/json
+      description: Get all booking
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Booking'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Booking
+    post:
+      consumes:
+      - application/json
+      description: Create booking
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateBookingRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Booking
+  /api/v1/booking/:booking_id:
+    delete:
+      consumes:
+      - application/json
+      description: Update booking
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Booking
+    get:
+      consumes:
+      - application/json
+      description: Get booking
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Booking'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Booking
+    put:
+      consumes:
+      - application/json
+      description: Update booking
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateBookingRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Booking
+  /api/v1/hotel:
+    get:
+      consumes:
+      - application/json
+      description: Get all Hotel
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Hotel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: Create Hotel
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateHotelRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Hotel
+  /api/v1/hotel/:id:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Hotel
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Hotel
+    get:
+      consumes:
+      - application/json
+      description: Get info Hotel
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Hotel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Update Hotel
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateHotelRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Hotel
+  /api/v1/hotel/room:
+    get:
+      consumes:
+      - application/json
+      description: Get all room
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Room'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: Create room
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateRoomRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Hotel
+    put:
+      consumes:
+      - application/json
+      description: Update room
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateRoomRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Hotel
+  /api/v1/hotel/room/:id:
+    delete:
+      consumes:
+      - application/json
+      description: Delete room
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Hotel
+    get:
+      consumes:
+      - application/json
+      description: Get info room
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Room'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
+  /api/v1/payment/:booking_id:
+    get:
+      consumes:
+      - application/json
+      description: Create payments
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreatePaymentRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Payment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Payment
+  /api/v1/payment/:payment_id:
+    get:
+      consumes:
+      - application/json
+      description: Get payment
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Payment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Payment
+  /api/v1/user:
+    delete:
+      consumes:
+      - application/json
+      description: Delete customer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Customer
+    get:
+      consumes:
+      - application/json
+      description: Get info customer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.InfoCustomerResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Customer
+    put:
+      consumes:
+      - application/json
+      description: Update info customer
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.InputRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.RegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Customer
+  /api/v1/user/address:
+    post:
+      consumes:
+      - application/json
+      description: Add address customer
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.AddressRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Address'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Customer
+    put:
+      consumes:
+      - application/json
+      description: Update address customer
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.AddressRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Address'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Customer
+  /api/v1/user/admin:
+    get:
+      consumes:
+      - application/json
+      description: Get all customer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.RegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Admin
+  /api/v1/user/admin/:id:
+    delete:
+      consumes:
+      - application/json
+      description: Delete customer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Admin
+    get:
+      consumes:
+      - application/json
+      description: Get info customer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.RegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Admin
+    put:
+      consumes:
+      - application/json
+      description: Update info customer
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.InputRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.RegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Private
+      tags:
+      - Admin
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Login email and password
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: Register name, email, and password
+      parameters:
+      - description: The input user struct
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.InputRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.RegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
+swagger: "2.0"

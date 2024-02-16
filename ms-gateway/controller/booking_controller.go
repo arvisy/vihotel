@@ -24,6 +24,18 @@ func NewBookingController(userGRPC pb.UserServiceClient, hotelGRPC pb.HotelServi
 	}
 }
 
+// @Summary      Private
+// @Description  Create booking
+// @Tags         Booking
+// @Accept       json
+// @Produce      json
+// @Param		 data body model.CreateBookingRequest true "The input user struct"
+// @Success      201  {object}  helper.Message
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/booking [Post]
 func (b *BookingController) CreateBooking(c echo.Context) error {
 	userStrCon := c.Get("id").(string)
 	userID, _ := strconv.Atoi(userStrCon)
@@ -86,6 +98,17 @@ func (b *BookingController) CreateBooking(c echo.Context) error {
 	return c.JSON(201, response)
 }
 
+// @Summary      Private
+// @Description  Get booking
+// @Tags         Booking
+// @Accept       json
+// @Produce      json
+// @Success      201  {object}  model.Booking
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/booking/:booking_id [Get]
 func (b *BookingController) GetBooking(c echo.Context) error {
 	bookingID := c.Param("booking_id")
 	if bookingID == "" {
@@ -118,6 +141,18 @@ func (b *BookingController) GetBooking(c echo.Context) error {
 	return c.JSON(200, response)
 }
 
+// @Summary      Private
+// @Description  Update booking
+// @Tags         Booking
+// @Accept       json
+// @Produce      json
+// @Param		 data body model.CreateBookingRequest true "The input user struct"
+// @Success      201  {object}  helper.Message
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/booking/:booking_id [Put]
 func (b *BookingController) UpdateBooking(c echo.Context) error {
 	userStrCon := c.Get("id").(string)
 	userID, _ := strconv.Atoi(userStrCon)
@@ -182,6 +217,17 @@ func (b *BookingController) UpdateBooking(c echo.Context) error {
 	return c.JSON(200, response)
 }
 
+// @Summary      Private
+// @Description  Update booking
+// @Tags         Booking
+// @Accept       json
+// @Produce      json
+// @Success      201  {object}  helper.Message
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/booking/:booking_id [Delete]
 func (b *BookingController) DeleteBooking(c echo.Context) error {
 	bookingID := c.Param("booking_id")
 	if bookingID == "" {
@@ -226,6 +272,17 @@ func (b *BookingController) DeleteBooking(c echo.Context) error {
 	return c.JSON(200, response)
 }
 
+// @Summary      Private
+// @Description  Get all booking
+// @Tags         Booking
+// @Accept       json
+// @Produce      json
+// @Success      201  {object}  model.Booking
+// @Failure      400  {object}  helper.Message
+// @Failure      401  {object}  helper.Message
+// @Failure      404  {object}  helper.Message
+// @Failure      500  {object}  helper.MessageDetails
+// @Router       /api/v1/booking [Get]
 func (b *BookingController) ListBookings(c echo.Context) error {
 	userStrConv := c.Get("id").(string)
 	userID, _ := strconv.Atoi(userStrConv)

@@ -17,3 +17,23 @@ type Room struct {
 	CreatedAt string `json:"create_at"`
 	UpdatedAt string `json:"update_at"`
 }
+
+// for swagger
+type CreateHotelRequest struct {
+	Name        string `json:"name"`
+	Location    string `json:"location"`
+	Description string `json:"description"`
+}
+
+type CreateRoomRequest struct {
+	HotelID  int32 `json:"hotel_id"`
+	Capacity int32 `json:"capacity"`
+	Price    int32 `json:"price"`
+}
+
+type UpdateRoomRequest struct {
+	ID       int32 `json:"id"`
+	HotelID  int32 `json:"hotel_id"`
+	Capacity int32 `json:"capacity"`
+	Price    int32 `json:"price"`
+}
