@@ -8,6 +8,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	echoMiddleware "github.com/labstack/echo/v4/middleware"
+	echoSwagger "github.com/swaggo/echo-swagger"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -69,8 +70,10 @@ func main() {
 
 	route.InitRoutes(e, u, h, b, p)
 
-	// e.Use(echoMiddleware.Logger())
+	e.Use(echoMiddleware.Logger())
 	e.Use(echoMiddleware.Recover())
+
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
