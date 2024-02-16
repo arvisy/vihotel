@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"ms-gateway/controller"
+	_ "ms-gateway/docs"
 	"ms-gateway/pb"
 	route "ms-gateway/router"
 
