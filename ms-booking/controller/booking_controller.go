@@ -58,8 +58,8 @@ func (b *BookingController) GetBooking(ctx context.Context, in *pb.GetBookingReq
 
 	bookingProto := &pb.Booking{
 		BookingId:    booking.ID.Hex(),
-		UserId:       booking.UserID,
-		RoomId:       booking.RoomID,
+		UserId:       booking.User.ID,
+		RoomId:       booking.Room.ID,
 		CheckinDate:  booking.CheckinDate,
 		CheckoutDate: booking.CheckoutDate,
 		Status:       booking.Status,
@@ -73,18 +73,15 @@ func (b *BookingController) GetBooking(ctx context.Context, in *pb.GetBookingReq
 }
 
 func (s *BookingController) UpdateBooking(ctx context.Context, req *pb.UpdateBookingRequest) (*pb.UpdateBookingResponse, error) {
-	// Validasi booking ID
 	bookingID, err := primitive.ObjectIDFromHex(req.BookingId)
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "invalid booking ID: %v", err)
 	}
 
-	// Update booking di repository
 	if err := s.bookingRepository.UpdateBooking(ctx, bookingID, req.Booking); err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to update booking: %v", err)
 	}
 
-	// Buat respons
 	resp := &pb.UpdateBookingResponse{
 		BookingId: req.BookingId,
 	}
@@ -113,8 +110,8 @@ func (b *BookingController) ListBookings(ctx context.Context, in *pb.ListBooking
 	for _, booking := range bookings {
 		bookingProto := &pb.Booking{
 			BookingId:    booking.ID.Hex(),
-			UserId:       booking.UserID,
-			RoomId:       booking.RoomID,
+			UserId:       booking.User.ID,
+			RoomId:       booking.Room.ID,
 			CheckinDate:  booking.CheckinDate,
 			CheckoutDate: booking.CheckoutDate,
 			Status:       booking.Status,

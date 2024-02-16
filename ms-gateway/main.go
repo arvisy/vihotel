@@ -43,9 +43,19 @@ func main() {
 	bookingService := pb.NewBookingServiceClient(bookingConn)
 	b := controller.NewBookingController(userService, hotelService, bookingService)
 
+	// payment-service
+	paymentConn, err := grpc.Dial(":50004", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer paymentConn.Close()
+
+	paymentService := pb.NewPaymentServiceClient(paymentConn)
+	p := controller.NewPaymentController(paymentService, bookingService)
+
 	e := echo.New()
 
-	route.InitRoutes(e, u, h, b)
+	route.InitRoutes(e, u, h, b, p)
 
 	// e.Use(echoMiddleware.Logger())
 	e.Use(echoMiddleware.Recover())

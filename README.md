@@ -47,3 +47,7 @@ An e-commerce API for booking hotel and with many features, made using microserv
 ### Booking
 
 <img align="center" src="./misc/booking-erd.png" width="650px" >
+
+### Payment
+
+<img align="center" src="./misc/payment-erd.png" width="650px" >

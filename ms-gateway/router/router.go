@@ -12,10 +12,15 @@ func InitRoutes(
 	user *controller.UserContoller,
 	hotel *controller.HotelController,
 	booking *controller.BookingController,
+	payment *controller.PaymentController,
 ) {
 	// public endpoint
 	e.POST("/register", user.Register)
 	e.POST("/login", user.Login)
+	e.GET("/hotel/:id", hotel.GetHotel)
+	e.GET("/hotel", hotel.ListHotels)
+	e.GET("/hotel/room/:id", hotel.GetRoom)
+	e.GET("/hotel/room", hotel.ListRooms)
 
 	// private endpoint
 	customer := e.Group("/api/v1")
@@ -32,6 +37,9 @@ func InitRoutes(
 		customer.PUT("/booking/:booking_id", booking.UpdateBooking)
 		customer.GET("/booking", booking.ListBookings)
 		customer.DELETE("/booking/:booking_id", booking.DeleteBooking)
+
+		customer.POST("/payment/:booking_id", payment.CreatePayment)
+		customer.GET("/payment/:payment_id", payment.GetPayment)
 	}
 
 	admin := e.Group("/api/v1")
@@ -45,13 +53,9 @@ func InitRoutes(
 		admin.POST("/hotel", hotel.CreateHotel)
 		admin.PUT("/hotel", hotel.UpdateHotel)
 		admin.DELETE("/hotel/:id", hotel.DeleteHotel)
-		admin.GET("/hotel/:id", hotel.GetHotel)
-		admin.GET("/hotel", hotel.ListHotels)
 
 		admin.POST("/hotel/room", hotel.CreateRoom)
 		admin.PUT("/hotel/room", hotel.UpdateRoom)
 		admin.DELETE("/hotel/room/:id", hotel.DeleteRoom)
-		admin.GET("/hotel/room/:id", hotel.GetRoom)
-		admin.GET("/hotel/room", hotel.ListRooms)
 	}
 }

@@ -34,12 +34,12 @@ func (b *BookingRepository) CreateBooking(booking *model.BookingDetails) (string
 	return insertedID.Hex(), nil
 }
 
-func (b *BookingRepository) GetBookingByID(bookingID string) (*model.Booking, error) {
+func (b *BookingRepository) GetBookingByID(bookingID string) (*model.BookingDetails, error) {
 	id, err := primitive.ObjectIDFromHex(bookingID)
 	if err != nil {
 		return nil, err
 	}
-	var booking model.Booking
+	var booking model.BookingDetails
 	err = b.DB.Collection("bookings").FindOne(context.Background(), bson.M{"_id": id}).Decode(&booking)
 	if err != nil {
 		return nil, err
@@ -82,16 +82,16 @@ func (b *BookingRepository) DeleteBooking(bookingID string) error {
 	return nil
 }
 
-func (b *BookingRepository) ListBookings(userID int32) ([]*model.Booking, error) {
-	var bookings []*model.Booking
-	cursor, err := b.DB.Collection("bookings").Find(context.Background(), bson.M{"user_id": userID})
+func (b *BookingRepository) ListBookings(userID int32) ([]*model.BookingDetails, error) {
+	var bookings []*model.BookingDetails
+	cursor, err := b.DB.Collection("bookings").Find(context.Background(), bson.M{"user_info._id": userID})
 	if err != nil {
 		return nil, err
 	}
 	defer cursor.Close(context.Background())
 
 	for cursor.Next(context.Background()) {
-		var booking model.Booking
+		var booking model.BookingDetails
 		if err := cursor.Decode(&booking); err != nil {
 			return nil, err
 		}

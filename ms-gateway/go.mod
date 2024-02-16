@@ -6,6 +6,7 @@ require (
 	github.com/form3tech-oss/jwt-go v3.2.5+incompatible
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/labstack/echo/v4 v4.11.4
+	go.mongodb.org/mongo-driver v1.14.0
 	google.golang.org/grpc v1.61.1
 	google.golang.org/protobuf v1.32.0
 )
