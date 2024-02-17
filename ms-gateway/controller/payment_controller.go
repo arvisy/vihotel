@@ -26,7 +26,9 @@ func NewPaymentController(paymentGRPC pb.PaymentServiceClient, bookingGRPC pb.Bo
 // @Tags         Payment
 // @Accept       json
 // @Produce      json
-// @Param		 data body model.CreatePaymentRequest true "The input user struct"
+// @Param Authorization header string true "JWT Token"
+// @Param		 Data body model.CreatePaymentRequest true "The input user struct"
+// @Param ID path int true "Booking ID"
 // @Success      201  {object}  model.Payment
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -96,6 +98,8 @@ func (p *PaymentController) CreatePayment(c echo.Context) error {
 // @Tags         Payment
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Payment ID"
 // @Success      201  {object}  model.Payment
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message

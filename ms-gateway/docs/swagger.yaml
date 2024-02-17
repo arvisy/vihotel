@@ -207,6 +207,12 @@ paths:
       consumes:
       - application/json
       description: Get all booking
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -238,6 +244,11 @@ paths:
       - application/json
       description: Create booking
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: The input user struct
         in: body
         name: data
@@ -275,6 +286,17 @@ paths:
       consumes:
       - application/json
       description: Update booking
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Booking ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -305,6 +327,17 @@ paths:
       consumes:
       - application/json
       description: Get booking
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Booking ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -336,6 +369,16 @@ paths:
       - application/json
       description: Update booking
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Booking ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       - description: The input user struct
         in: body
         name: data
@@ -369,41 +412,16 @@ paths:
       tags:
       - Booking
   /api/v1/hotel:
-    get:
-      consumes:
-      - application/json
-      description: Get all Hotel
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/model.Hotel'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/helper.MessageDetails'
-      summary: Public
-      tags:
-      - User
     post:
       consumes:
       - application/json
       description: Create Hotel
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: The input user struct
         in: body
         name: data
@@ -441,6 +459,17 @@ paths:
       consumes:
       - application/json
       description: Delete Hotel
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Hotel ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -467,41 +496,21 @@ paths:
       summary: Private
       tags:
       - Hotel
-    get:
-      consumes:
-      - application/json
-      description: Get info Hotel
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/model.Hotel'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/helper.MessageDetails'
-      summary: Public
-      tags:
-      - User
     put:
       consumes:
       - application/json
       description: Update Hotel
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Hotel ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       - description: The input user struct
         in: body
         name: data
@@ -535,44 +544,19 @@ paths:
       tags:
       - Hotel
   /api/v1/hotel/room:
-    get:
-      consumes:
-      - application/json
-      description: Get all room
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/model.Room'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/helper.MessageDetails'
-      summary: Public
-      tags:
-      - User
     post:
       consumes:
       - application/json
       description: Create room
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: The input user struct
         in: body
-        name: data
+        name: Data
         required: true
         schema:
           $ref: '#/definitions/model.CreateRoomRequest'
@@ -607,9 +591,14 @@ paths:
       - application/json
       description: Update room
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: The input user struct
         in: body
-        name: data
+        name: Data
         required: true
         schema:
           $ref: '#/definitions/model.UpdateRoomRequest'
@@ -644,6 +633,17 @@ paths:
       consumes:
       - application/json
       description: Delete room
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Room ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -670,48 +670,28 @@ paths:
       summary: Private
       tags:
       - Hotel
-    get:
-      consumes:
-      - application/json
-      description: Get info room
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/model.Room'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/helper.Message'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/helper.MessageDetails'
-      summary: Public
-      tags:
-      - User
   /api/v1/payment/:booking_id:
     get:
       consumes:
       - application/json
       description: Create payments
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: The input user struct
         in: body
-        name: data
+        name: Data
         required: true
         schema:
           $ref: '#/definitions/model.CreatePaymentRequest'
+      - description: Booking ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -743,6 +723,17 @@ paths:
       consumes:
       - application/json
       description: Get payment
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Payment ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -774,6 +765,12 @@ paths:
       consumes:
       - application/json
       description: Delete customer
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -804,6 +801,12 @@ paths:
       consumes:
       - application/json
       description: Get info customer
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -835,9 +838,14 @@ paths:
       - application/json
       description: Update info customer
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: The input user struct
         in: body
-        name: data
+        name: Data
         required: true
         schema:
           $ref: '#/definitions/model.InputRegisterRequest'
@@ -873,6 +881,11 @@ paths:
       - application/json
       description: Add address customer
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: The input user struct
         in: body
         name: data
@@ -910,6 +923,11 @@ paths:
       - application/json
       description: Update address customer
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: The input user struct
         in: body
         name: data
@@ -947,6 +965,12 @@ paths:
       consumes:
       - application/json
       description: Get all customer
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -978,6 +1002,17 @@ paths:
       consumes:
       - application/json
       description: Delete customer
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Customer ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -1008,6 +1043,17 @@ paths:
       consumes:
       - application/json
       description: Get info customer
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Customer ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -1039,6 +1085,16 @@ paths:
       - application/json
       description: Update info customer
       parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Customer ID
+        in: path
+        name: ID
+        required: true
+        type: integer
       - description: The input user struct
         in: body
         name: data
@@ -1071,6 +1127,142 @@ paths:
       summary: Private
       tags:
       - Admin
+  /hotel:
+    get:
+      consumes:
+      - application/json
+      description: Get all Hotel
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Hotel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
+  /hotel/:id:
+    get:
+      consumes:
+      - application/json
+      description: Get info Hotel
+      parameters:
+      - description: Hotel ID
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Hotel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
+  /hotel/room:
+    get:
+      consumes:
+      - application/json
+      description: Get all room
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Room'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
+  /hotel/room/:id:
+    get:
+      consumes:
+      - application/json
+      description: Get info room
+      parameters:
+      - description: Room ID
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Room'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.MessageDetails'
+      summary: Public
+      tags:
+      - User
   /login:
     post:
       consumes:
@@ -1079,7 +1271,7 @@ paths:
       parameters:
       - description: The input user struct
         in: body
-        name: data
+        name: Data
         required: true
         schema:
           $ref: '#/definitions/model.LoginRequest'
@@ -1113,7 +1305,7 @@ paths:
       parameters:
       - description: The input user struct
         in: body
-        name: data
+        name: Data
         required: true
         schema:
           $ref: '#/definitions/model.InputRegisterRequest'

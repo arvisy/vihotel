@@ -25,6 +25,7 @@ func NewHotelController(hotelGRPC pb.HotelServiceClient) *HotelController {
 // @Tags         Hotel
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
 // @Param		 data body model.CreateHotelRequest true "The input user struct"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
@@ -70,6 +71,8 @@ func (h *HotelController) CreateHotel(c echo.Context) error {
 // @Tags         Hotel
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Hotel ID"
 // @Param		 data body model.CreateHotelRequest true "The input user struct"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
@@ -116,6 +119,8 @@ func (h *HotelController) UpdateHotel(c echo.Context) error {
 // @Tags         Hotel
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Hotel ID"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -152,12 +157,13 @@ func (h *HotelController) DeleteHotel(c echo.Context) error {
 // @Tags         User
 // @Accept       json
 // @Produce      json
+// @Param ID path int true "Hotel ID"
 // @Success      201  {object}  model.Hotel
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
 // @Failure      404  {object}  helper.Message
 // @Failure      500  {object}  helper.MessageDetails
-// @Router       /api/v1/hotel/:id [Get]
+// @Router       /hotel/:id [Get]
 func (h *HotelController) GetHotel(c echo.Context) error {
 	id := c.Param("id")
 	if id == "" {
@@ -193,7 +199,7 @@ func (h *HotelController) GetHotel(c echo.Context) error {
 // @Failure      401  {object}  helper.Message
 // @Failure      404  {object}  helper.Message
 // @Failure      500  {object}  helper.MessageDetails
-// @Router       /api/v1/hotel [Get]
+// @Router       /hotel [Get]
 func (h *HotelController) ListHotels(c echo.Context) error {
 	in := &pb.ListHotelsRequest{}
 
@@ -213,7 +219,8 @@ func (h *HotelController) ListHotels(c echo.Context) error {
 // @Tags         Hotel
 // @Accept       json
 // @Produce      json
-// @Param		 data body model.CreateRoomRequest true "The input user struct"
+// @Param Authorization header string true "JWT Token"
+// @Param		 Data body model.CreateRoomRequest true "The input user struct"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -258,7 +265,8 @@ func (h *HotelController) CreateRoom(c echo.Context) error {
 // @Tags         Hotel
 // @Accept       json
 // @Produce      json
-// @Param		 data body model.UpdateRoomRequest true "The input user struct"
+// @Param Authorization header string true "JWT Token"
+// @Param		 Data body model.UpdateRoomRequest true "The input user struct"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -304,6 +312,8 @@ func (h *HotelController) UpdateRoom(c echo.Context) error {
 // @Tags         Hotel
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Room ID"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -340,12 +350,13 @@ func (h *HotelController) DeleteRoom(c echo.Context) error {
 // @Tags         User
 // @Accept       json
 // @Produce      json
+// @Param ID path int true "Room ID"
 // @Success      201  {object}  model.Room
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
 // @Failure      404  {object}  helper.Message
 // @Failure      500  {object}  helper.MessageDetails
-// @Router       /api/v1/hotel/room/:id [Get]
+// @Router       /hotel/room/:id [Get]
 func (h *HotelController) GetRoom(c echo.Context) error {
 	id := c.Param("id")
 	if id == "" {
@@ -381,7 +392,7 @@ func (h *HotelController) GetRoom(c echo.Context) error {
 // @Failure      401  {object}  helper.Message
 // @Failure      404  {object}  helper.Message
 // @Failure      500  {object}  helper.MessageDetails
-// @Router       /api/v1/hotel/room [Get]
+// @Router       /hotel/room [Get]
 func (h *HotelController) ListRooms(c echo.Context) error {
 	hotelID := c.QueryParam("hotel_id")
 

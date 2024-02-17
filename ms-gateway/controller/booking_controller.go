@@ -29,6 +29,7 @@ func NewBookingController(userGRPC pb.UserServiceClient, hotelGRPC pb.HotelServi
 // @Tags         Booking
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
 // @Param		 data body model.CreateBookingRequest true "The input user struct"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
@@ -103,6 +104,8 @@ func (b *BookingController) CreateBooking(c echo.Context) error {
 // @Tags         Booking
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Booking ID"
 // @Success      201  {object}  model.Booking
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -146,6 +149,8 @@ func (b *BookingController) GetBooking(c echo.Context) error {
 // @Tags         Booking
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Booking ID"
 // @Param		 data body model.CreateBookingRequest true "The input user struct"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
@@ -222,6 +227,8 @@ func (b *BookingController) UpdateBooking(c echo.Context) error {
 // @Tags         Booking
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Booking ID"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -277,6 +284,7 @@ func (b *BookingController) DeleteBooking(c echo.Context) error {
 // @Tags         Booking
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
 // @Success      201  {object}  model.Booking
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message

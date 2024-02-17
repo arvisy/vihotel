@@ -28,7 +28,7 @@ func NewUserController(userGRPC pb.UserServiceClient) *UserController {
 // @Tags         User
 // @Accept       json
 // @Produce      json
-// @Param		 data body model.InputRegisterRequest true "The input user struct"
+// @Param		 Data body model.InputRegisterRequest true "The input user struct"
 // @Success      201  {object}  model.RegisterResponse
 // @Failure      400  {object}  helper.Message
 // @Failure      404  {object}  helper.Message
@@ -81,7 +81,7 @@ func (u *UserController) Register(c echo.Context) error {
 // @Tags         User
 // @Accept       json
 // @Produce      json
-// @Param		 data body model.LoginRequest true "The input user struct"
+// @Param		 Data body model.LoginRequest true "The input user struct"
 // @Success      201  {object}  model.LoginResponse
 // @Failure      400  {object}  helper.Message
 // @Failure      404  {object}  helper.Message
@@ -137,6 +137,7 @@ func (u *UserController) Login(c echo.Context) error {
 // @Tags         Customer
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
 // @Success      201  {object}  model.InfoCustomerResponse
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -183,7 +184,8 @@ func (u *UserController) GetInfoCustomer(c echo.Context) error {
 // @Tags         Customer
 // @Accept       json
 // @Produce      json
-// @Param		 data body model.InputRegisterRequest true "The input user struct"
+// @Param Authorization header string true "JWT Token"
+// @Param		 Data body model.InputRegisterRequest true "The input user struct"
 // @Success      201  {object}  model.RegisterResponse
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -246,6 +248,7 @@ func (u *UserController) UpdateCustomer(c echo.Context) error {
 // @Tags         Customer
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -288,6 +291,8 @@ func (u *UserController) DeleteCustomer(c echo.Context) error {
 // @Tags         Admin
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Customer ID"
 // @Success      201  {object}  model.RegisterResponse
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -325,6 +330,7 @@ func (u *UserController) GetCustomerAdmin(c echo.Context) error {
 // @Tags         Admin
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
 // @Success      201  {object}  model.RegisterResponse
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -351,6 +357,8 @@ func (u *UserController) GetAllCustomerAdmin(c echo.Context) error {
 // @Tags         Admin
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Customer ID"
 // @Param		 data body model.InputRegisterRequest true "The input user struct"
 // @Success      201  {object}  model.RegisterResponse
 // @Failure      400  {object}  helper.Message
@@ -400,6 +408,8 @@ func (u *UserController) UpdateCustomerAdmin(c echo.Context) error {
 // @Tags         Admin
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
+// @Param ID path int true "Customer ID"
 // @Success      201  {object}  helper.Message
 // @Failure      400  {object}  helper.Message
 // @Failure      401  {object}  helper.Message
@@ -437,6 +447,7 @@ func (u *UserController) DeleteCustomerAdmin(c echo.Context) error {
 // @Tags         Customer
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
 // @Param		 data body model.AddressRequest true "The input user struct"
 // @Success      201  {object}  model.Address
 // @Failure      400  {object}  helper.Message
@@ -506,6 +517,7 @@ func (u *UserController) AddAddress(c echo.Context) error {
 // @Tags         Customer
 // @Accept       json
 // @Produce      json
+// @Param Authorization header string true "JWT Token"
 // @Param		 data body model.AddressRequest true "The input user struct"
 // @Success      201  {object}  model.Address
 // @Failure      400  {object}  helper.Message

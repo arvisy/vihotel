@@ -36,6 +36,15 @@ const docTemplate = `{
                     "Booking"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -82,6 +91,13 @@ const docTemplate = `{
                 ],
                 "summary": "Private",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "The input user struct",
                         "name": "data",
@@ -139,6 +155,22 @@ const docTemplate = `{
                     "Booking"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Booking ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -185,6 +217,20 @@ const docTemplate = `{
                 ],
                 "summary": "Private",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Booking ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    },
                     {
                         "description": "The input user struct",
                         "name": "data",
@@ -240,6 +286,22 @@ const docTemplate = `{
                     "Booking"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Booking ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -275,51 +337,6 @@ const docTemplate = `{
             }
         },
         "/api/v1/hotel": {
-            "get": {
-                "description": "Get all Hotel",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User"
-                ],
-                "summary": "Public",
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/model.Hotel"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/helper.MessageDetails"
-                        }
-                    }
-                }
-            },
             "post": {
                 "description": "Create Hotel",
                 "consumes": [
@@ -333,6 +350,13 @@ const docTemplate = `{
                 ],
                 "summary": "Private",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "The input user struct",
                         "name": "data",
@@ -378,51 +402,6 @@ const docTemplate = `{
             }
         },
         "/api/v1/hotel/:id": {
-            "get": {
-                "description": "Get info Hotel",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User"
-                ],
-                "summary": "Public",
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/model.Hotel"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/helper.MessageDetails"
-                        }
-                    }
-                }
-            },
             "put": {
                 "description": "Update Hotel",
                 "consumes": [
@@ -436,6 +415,20 @@ const docTemplate = `{
                 ],
                 "summary": "Private",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Hotel ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    },
                     {
                         "description": "The input user struct",
                         "name": "data",
@@ -491,6 +484,22 @@ const docTemplate = `{
                     "Hotel"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Hotel ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -526,51 +535,6 @@ const docTemplate = `{
             }
         },
         "/api/v1/hotel/room": {
-            "get": {
-                "description": "Get all room",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User"
-                ],
-                "summary": "Public",
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/model.Room"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/helper.MessageDetails"
-                        }
-                    }
-                }
-            },
             "put": {
                 "description": "Update room",
                 "consumes": [
@@ -585,8 +549,15 @@ const docTemplate = `{
                 "summary": "Private",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "description": "The input user struct",
-                        "name": "data",
+                        "name": "Data",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -641,8 +612,15 @@ const docTemplate = `{
                 "summary": "Private",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "description": "The input user struct",
-                        "name": "data",
+                        "name": "Data",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -685,51 +663,6 @@ const docTemplate = `{
             }
         },
         "/api/v1/hotel/room/:id": {
-            "get": {
-                "description": "Get info room",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User"
-                ],
-                "summary": "Public",
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/model.Room"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/helper.Message"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/helper.MessageDetails"
-                        }
-                    }
-                }
-            },
             "delete": {
                 "description": "Delete room",
                 "consumes": [
@@ -742,6 +675,22 @@ const docTemplate = `{
                     "Hotel"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Room ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -791,13 +740,27 @@ const docTemplate = `{
                 "summary": "Private",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "description": "The input user struct",
-                        "name": "data",
+                        "name": "Data",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/model.CreatePaymentRequest"
                         }
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Booking ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -847,6 +810,22 @@ const docTemplate = `{
                     "Payment"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Payment ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -894,6 +873,15 @@ const docTemplate = `{
                     "Customer"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -941,8 +929,15 @@ const docTemplate = `{
                 "summary": "Private",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "description": "The input user struct",
-                        "name": "data",
+                        "name": "Data",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -995,6 +990,15 @@ const docTemplate = `{
                     "Customer"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -1043,6 +1047,13 @@ const docTemplate = `{
                 ],
                 "summary": "Private",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "The input user struct",
                         "name": "data",
@@ -1100,6 +1111,13 @@ const docTemplate = `{
                 "summary": "Private",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "description": "The input user struct",
                         "name": "data",
                         "in": "body",
@@ -1156,6 +1174,15 @@ const docTemplate = `{
                     "Admin"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -1203,6 +1230,22 @@ const docTemplate = `{
                     "Admin"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Customer ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -1249,6 +1292,20 @@ const docTemplate = `{
                 ],
                 "summary": "Private",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Customer ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    },
                     {
                         "description": "The input user struct",
                         "name": "data",
@@ -1304,11 +1361,233 @@ const docTemplate = `{
                     "Admin"
                 ],
                 "summary": "Private",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Customer ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/helper.MessageDetails"
+                        }
+                    }
+                }
+            }
+        },
+        "/hotel": {
+            "get": {
+                "description": "Get all Hotel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Public",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/model.Hotel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/helper.MessageDetails"
+                        }
+                    }
+                }
+            }
+        },
+        "/hotel/:id": {
+            "get": {
+                "description": "Get info Hotel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Public",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Hotel ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/model.Hotel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/helper.MessageDetails"
+                        }
+                    }
+                }
+            }
+        },
+        "/hotel/room": {
+            "get": {
+                "description": "Get all room",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Public",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/model.Room"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Message"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/helper.MessageDetails"
+                        }
+                    }
+                }
+            }
+        },
+        "/hotel/room/:id": {
+            "get": {
+                "description": "Get info room",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Public",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Room ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/model.Room"
                         }
                     },
                     "400": {
@@ -1354,7 +1633,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "The input user struct",
-                        "name": "data",
+                        "name": "Data",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -1406,7 +1685,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "The input user struct",
-                        "name": "data",
+                        "name": "Data",
                         "in": "body",
                         "required": true,
                         "schema": {
