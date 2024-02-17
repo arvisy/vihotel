@@ -26,9 +26,9 @@ An e-commerce API for booking hotel and with many features, made using microserv
 - Xendit
 
 ## Application Structure
-<!-- <img align="center" src="./misc/kiwish-structure.png" width="700px" > -->
+<img align="center" src="./misc/application-structure.jpeg" width="700px" >
 
-## Application Flow
+<!-- ## Application Flow -->
 <!-- <img align="center" src="./misc/kiwish-user.png" width="700px" > -->
 
 ---
